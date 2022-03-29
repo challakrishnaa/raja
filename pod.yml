@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nodeapp
+  labels:
+    app: nodeapp
+spec:
+  containers:
+  - image: nginx:stable
+    name: nodeapp
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysvc
+spec:
+  type: ClusterIP
+  selector:
+    app: nodeapp
+  ports:
+  - port: 80
+    targetPort: 80
